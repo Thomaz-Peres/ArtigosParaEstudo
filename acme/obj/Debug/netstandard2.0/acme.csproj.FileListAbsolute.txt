@@ -1,0 +1,9 @@
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\bin\Debug\netstandard2.0\acme.deps.json
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\bin\Debug\netstandard2.0\acme.dll
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\bin\Debug\netstandard2.0\acme.pdb
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.csprojAssemblyReference.cache
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.AssemblyInfoInputs.cache
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.AssemblyInfo.cs
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.csproj.CoreCompileInputs.cache
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.dll
+C:\Users\AlphaPaiN\Documents\AB study\TutorialMicrosoft\acme\obj\Debug\netstandard2.0\acme.pdb

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "A1jGqc/rrkXhJc7oaLIfXYg2eIb0AqSOdRN9/W8RIFwJFI58Uqas41fpHFE0Fj5RsKSf9Zby/1b5tEXH1WnJww==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AlphaPaiN\\Documents\\AB study\\TutorialMicrosoft\\acme\\acme.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AlphaPaiN\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\AlphaPaiN\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

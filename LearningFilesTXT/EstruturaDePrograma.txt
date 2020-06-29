@@ -1,0 +1,13 @@
+Os assemblie contêm código executável na forma de instruções de IL(Linguagem intermediária) e informações simnbólicas na formad e metadados.
+
+Antes de ser executado, o compilador JIT(just-in-time) do .NET Common Langugage Runtime coverte o código IL em um assembly para o código específico do processador.
+
+Como um assembly é uma unidade de funcionalidade auto-descritiva que contém o código e os metadados, não há  necessidade de (#include) de diretivas e arquivos de cabeçalho em C#. Os tipos públicos e os membros contidos em um assembly específico sao disponibilizados em um programa C# simplesmente fazendo referencia a esse assembly ao compular o programa.
+
+
+
+//************************************************************************************//
+
+O C# permite que o texto de origem de um programa seja armazenado em vários arquivos de origem. 
+
+Quando um programa em C# com vários arquivos são compilados, todos os arquivos de origem são processados juntos e os arquivos de origem podem referenciar livremente uns aos outros. Conceitualmente, é como se todos os arquivos de origem fossem concatenados em um arquivo grande antes de serem processados.    Declarações de enchaminhamento nunca são necessárias em C# porque, com poucas exceções, a ordem de declaração é insignificante. O C# não limita um arquivo de origem para declarar somente um tipo público nem requer o nome do arquivo de origem para corresponder a um tipo declarado no arquivo de origem.
