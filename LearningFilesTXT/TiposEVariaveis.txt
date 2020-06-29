@@ -1,0 +1,67 @@
+Os programas em C# usam declarações de tipos para criar novos tipos. Uma declaração de tipo especifica o nome e os membros do novo tipo. Cinco das categorias de tipos do C# são definíveis pelo usuário: tipos de class, tipos de struct, tipos de interface, tipos de enum e tipos delegate.
+
+
+Um tipo (class) define uma estrutura de dados que contém membros de dados (field) e membros de função (methods, properties e others). Os tipos de classe dão suporte à herança única e ao polimorfismo, mecanismos nos quais as classes derivadas podem estender e especializar as classes base.
+
+
+um tripo (struct) é semelhante a um tipo de calsse que representa uma estrutura com membros de dados e membros de funçaão. No entanto, ao contrário das classes, as structs sao tipos de valor normalmente não exigem alocação do heap. Tipos de struct não dão suporte à herança especificada pelo usuário e todos os tipos de struct herdam implicitamente do tipo (object).
+
+Um tipo (interface) define um contrato como um conjunto nomeado de membros da função pública, um (class) ou (struct) que implementa um (interface) deve fornecer implementações dos membros da função da interface. Um (interface) pode herdar de várias interfaces base e um (class) ou (struct) pode implementar várias interfaces.
+
+Um tipo (delegate) representa referências aos methods com uma lista de parametros e tipo de retorno espicifico. Delegados possibilitam o tratamento de métodos como entidades que podem ser atribuídos a variáveis e passadas como parameters. Os delegados sao análogos aos tipos de função fornecidos peças linguagens funcionais. Eles também são semelhantes ao conceito de ponteiros de função, os (delegates) são orientados a objeto e são de tipo seguro.
+
+Os types (class), (struct), (interface) and (delegate) oferecem suporte a tipos genericos, no qual eles podem ser parametrizados com outros tipos.
+
+
+O tipo (enum) é um tipo distinto com nomes constantes. Todo tipo (enum) tem um tipo adjacente, que devem ser um dos oito tipos integrais. O conjunto de valores de um tipo (enum) é o mesmo que o conjunto de valores do tipo subjacente.
+
+
+Os tipos (array) nao precisam ser declarados antes que peossasm ser usados. Os (array) são construidos seguindo um name type entre concheter "[]". Por exemplo, int[] é um array single-dimesional de int, int[,] é um array two-dimesional de int, e int[][] é um array single-dimesional do array single-dimesional de int.
+
+
+Valores (null) também nao precisam ser declarados, para cada tipo "T" de valor nao anulavel, ha um tipo "T"?de valor anulavel correspondente, que pode conter um valor null. Por exemplo, int?  é um tipo que pode conter qualquer número 32bits interger ou de valor null. 
+
+
+Os sistema de TYPES do C# é unificado, de modo que qualquer tipo pode ser tratado como um object. Todo tipo em C# diretamente ou indiretamente deriva de um tipo class object, a class object é a class base definitiva de todos os tipos. Os valores do tipo REFERENCE, sao tratados como objetos simplesmente exibindo os valores como do tipo object. Os valores do tipo VALUE sao tratados como objetos, executando conversão boxing e operaçoes unboxing. No exemplo a seguir, um valor (int) é convertido em object e volta novamente ao (int).
+
+using System;
+class BoxingExample
+{
+    static void Main()
+    {
+        int i = 123;
+        object o = i;    // Boxing
+        int j = (int)o;  // Unboxing
+    }
+}
+
+
+Quando um valor de um tipo de value é atribuidop a object como referencia, uma "box" é alocada para conter o valor. Essa "box" é uma instacia de um tipo de (reference type), e o valor é copiado para essa box.    Por outro lado, quando um object referenciado é um convertido eum (value type), é feita uma verificação de object que a referencia é a caixa do (value type) correta.   Se a verificação for realizada com sucesso, o valor na caixa será copiada o tipo de (value type).
+
+
+O sistema de tipos unificados no C# é eficiente por que os (value types) sao tratados como object REFERENCE "sob demanda". Devido a unificação, as bibliotecas de uso geral que usam object de tipo podem ser usadas com todos os tipos derivados do object, incluindo REFERENCE type e (value type).
+
+
+Existem muitos tipos de variaveis no C#, incluindo (field, array elements, local variables, and parameters.) Variaveis representam locais de armazenamento, e cada variavel tem um tipo que determina quais valores podem ser armazenados na variavel, conforme mostrado abaixo.
+
+
+1.- Non-nullable value type
+    1.1 - A value of that exact type
+
+2.-Nullable value type
+    2.1- A null value or a value of that exact type
+
+3.-object
+    3.1- A null reference, a reference to an object of any reference type, or a reference to a boxed value of any value type
+
+4.-Class type
+    4.1-    A null reference, a reference to an instance of that class type, or a reference to an instance of a class derived from that class type
+
+5.- Interface type
+    5.1- A null reference, a reference to an instance of a class type that implements that interface type, or a reference to a boxed value of a value type that implements that interface type
+
+6.- Array type
+    6.1- A null reference, a reference to an instance of that array type, or a reference to an instance of a compatible array type
+
+7.- Delegate type
+    7.1- A null reference or a reference to an instance of a compatible delegate type

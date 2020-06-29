@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Acme.Collections
 {
     public class Stack
