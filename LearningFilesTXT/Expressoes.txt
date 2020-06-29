@@ -1,0 +1,18 @@
+Expressões sao construidas a partir de (operands) and (operators). Os operators sao expressões que indica quais operações sao aplicadas aos operands. Exemplos de operators inlcuem (+, -, *, / e new). Examples of operands incluem (literals, field, local variables and expressions).
+
+Quando uma expressão contiver vários operands, a precendência dos operators controla a ordem na qual os operands inidividuais sao avaliados. Por exemplo, a expressão "x + y * z" é avaliada como "x + (y*z)" porque o operators * tem precendência maior do que o operador +.
+
+Quando ocorre um operands entre dois operators com a mesma precendência, a associatividade dos operators controla ordem na qual as operações são executadas:
+
+1---- Com exceção da atribuição e dos operadores de coalizão nula, todos os operadores binários são associativos à esquerda, oque significa que as operações são realizadas da esquerda para a direita. Por exemplo, x + y + z é avaliado como (x + y) + z.
+
+2---- Os operadores de cessão, o nulo-coalescing ?? and ??= operators, e o operador condicional  ?: são associativos à direita, o que significa que as operações são realizadas da direita para a esquerda. Por exemplo, x = y = z é avaliado como x = (y = z).
+
+
+Precedência e associatividade podem ser controladas usando parênteses. Por exemplo, x + y * z primeiro multiplica y por z e, em seguida, adiciona o resultado a x, mas (x + y) * z primeiro adiciona x e y e, em seguida, multiplica o resultado por z.
+
+
+A maioria dos operadores pode ser sobrecarregada. A sobrecarga de operador permite que implementações de operador definidas pelo usuário sejam especificadas para operações em que um ou ambos os operands são de um tipo struct ou de class definida pelo usuário.
+
+
+C# fornece uma série de operadores para realizar operações aritméticas, lógicas, bit a bit e shift e comparações de igualdade e ordem.
