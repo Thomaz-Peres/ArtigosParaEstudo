@@ -1,0 +1,4 @@
+Um array é uma estrutura de dados que contêm algumas variaveis acessadas por meio de índices calculados.
+as variáveis contidas em um array sao chamadas de ELEMENTS do array, sao todas do mesmo tipo, e o tipo é chamado de ELEMENT TYPE do array.
+
+Os tipos de array do tipo REFERENCE, e a declaração de variavel de matriz reserva um espaço para uma REFERENCE para um array de instancia.
