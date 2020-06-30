@@ -1,4 +1,87 @@
-Um array é uma estrutura de dados que contêm algumas variaveis acessadas por meio de índices calculados.
-as variáveis contidas em um array sao chamadas de ELEMENTS do array, sao todas do mesmo tipo, e o tipo é chamado de ELEMENT TYPE do array.
+A INTERFACE define um contrato que pode ser implementado por calsses e structs.
+A interface pode conter methods, properties, events e indexers.
+Uma interface não fornece implementações dos membros que define, apenas especifica os membros que devem ser fornecidos por classes ou structs que implementam a interface.
 
-Os tipos de array do tipo REFERENCE, e a declaração de variavel de matriz reserva um espaço para uma REFERENCE para um array de instancia.
+Interfaces podem empregar multiplas heranças
+
+No exemplo a seguir, a interface IComboBox herda de ITextBox e IListBox.
+
+{
+    interface IControl
+    {
+        void Paint();
+    }
+    interface ITextBox: IControl
+    {
+        void SetText(string text);
+    }
+    interface IListBox: IControl
+    {
+        void SetItems(string[] items);
+    }
+    interface IComboBox: ITextBox, IListBox {}
+}
+
+
+Classes e structs podem implementar multiplas interfaces.
+
+No exemplo a seguir, a classe EditBox implementa IControl e IDataBound.
+
+{
+    interface IDataBound
+    {
+        void Bind(Binder b);
+    }
+    public class EditBox: IControl, IDataBound
+    {
+        public void Paint() { }
+        public void Bind(Binder b) { }
+    }
+}
+
+Quando class ou struct implementa um interface especifica/particular, a instancia da class ou estrutura podem ser implicitas convertidas em Interface Type
+For exemple
+
+{
+    EditBox editBox = new EditBox();
+    IControl control = editBox;
+    IDataBound dataBound = editBox;
+}
+
+
+Em casos onde a instancia nao é sabia estaticamente para implementar uma interface especifica, Tipos dynamic pode ser usado.
+
+Por exemplo, a seguir, os statements usa um tipoo dynamic para obter as implementações de interface de IControl e IDataBound do object.
+
+Como o tipo de tempo de execução real do objeto é EditBox, as conversões são bem-sucedidas.
+
+{
+    object obj = new EditBox();
+    IControl control = (IControl)obj;
+    IDataBound dataBound = (IDataBound)obj;
+}
+
+
+Na classe EditBox anterior, o metodo Paint da interface IControl e do metodo Bind da interface IDataBound sao implementadas usando public members
+
+C# oferece suporte explicitio em INTERFACE MEMBER IMPLEMENTATIONS, permitindo que a class ou struct evite tornar os membros publicos.
+Uma implementação explicita  de member interface é escrita usando o nome do member interface totalmente qualificado. Por exemplo, a classe EditBox pode implementar os metodos IControl.Paint e IDataBound.Bind, usando implementações de member interface explicitas da seguinte maneira
+
+{
+    public class EditBox: IControl, IDataBound
+    {
+        void IControl.Paint() { }
+        void IDataBound.Bind(Binder b) { }
+    }
+}
+
+
+Interface member explicitos so podem ser acessados via tipo INTERFACE.
+Por exemplo, a implementação de IControl.Paint fornecido pela class EditBox so pode ser chamada convertendo a referencia do EditBox para o tipo de INTERFACE IControl
+
+{
+    EditBox editBox = new EditBox();
+    editBox.Paint();            // Error, no such method
+    IControl control = editBox;
+    control.Paint();            // Ok
+}
