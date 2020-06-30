@@ -1,0 +1,72 @@
+Types, member e outras entities em um programa C# dao suporte a modificadores que controlam determinados aspectos de seu comportamento.
+
+Por exemplo, a acessibilidade de um metodo é controlada usando os modificadores PULBIC, PROTECTED, INTERNAL e PRIVATE.  O C# generaliza essa funcionalidade, de modo que os tipos definidos pelo usuario de informações declarativas podem ser anexados a entidades de programa e recuperados no tempo de execução. Os programas especificam essas informações declarativas adicionais definindo e usando ATTRIBUTES.
+
+No exemplo a seguir declara um atributo HelpAttribute que pode ser colocado em entidades de programa para fornecer links para a documentação associada.
+
+using System;
+
+public class HelpAttribute: Attribute
+{
+    string url;
+    string topic;
+    public HelpAttribute(string url)
+    {
+        this.url = url;
+    }
+
+    public string Url => url;
+
+    public string Topic {
+        get { return topic; }
+        set { topic = value; }
+    }
+}
+
+
+Todas as classes de atributo derivam da classe base Attribute fornecida pela biblioteca padrão. Os atributos podem ser aplicados, fornecendo seu nome, junto com quaisquer argumentos, dentro dos colchetes pouco antes da declaração associada. Se o nome de um atributo termina em Attribute, essa parte do nome pode ser omitida quando o atributo é referenciado. Por exemplo, o atributo HelpAttribute pode ser usado da seguinte maneira.
+
+
+[Help("https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/attributes")]
+public class Widget
+{
+    [Help("https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/attributes",
+    Topic = "Display")]
+    public void Display(string text) {}
+}
+
+
+
+
+
+Este exemplo anexa um HelpAttribute à classe Widget. Ele adiciona outro HelpAttribute ao método Display na classe. Os construtores públicos de uma classe de atributo controlam as informações que devem ser fornecidas quando o atributo é anexado a uma entidade de programa. As informações adicionais podem ser fornecidas ao referenciar propriedades públicas de leitura-gravação da classe de atributo (como a referência anterior à propriedade Topic).
+
+
+
+Os metadados definidos por atributos podem ser lidos e manipulados em runtime usando reflexão. Quando um atributo específico for solicitado usando esta técnica, o construtor para a classe de atributo será invocado com as informações fornecidas na origem do programa e a instância do atributo resultante será retornada. Se forem fornecidas informações adicionais por meio de propriedades, essas propriedades serão definidas para os valores fornecidos antes que a instância do atributo seja retornada.
+
+O exemplo de código a seguir demonstra como obter as instâncias HelpAttribute associadas à classe Widget e seu método Display.
+
+Type widgetType = typeof(Widget);
+
+//Gets every HelpAttribute defined for the Widget type
+object[] widgetClassAttributes = widgetType.GetCustomAttributes(typeof(HelpAttribute), false);
+
+if (widgetClassAttributes.Length > 0)
+{
+    HelpAttribute attr = (HelpAttribute)widgetClassAttributes[0];
+    Console.WriteLine($"Widget class help URL : {attr.Url} - Related topic : {attr.Topic}");
+}
+
+System.Reflection.MethodInfo displayMethod = widgetType.GetMethod(nameof(Widget.Display));
+
+//Gets every HelpAttribute defined for the Widget.Display method
+object[] displayMethodAttributes = displayMethod.GetCustomAttributes(typeof(HelpAttribute), false);
+
+if (displayMethodAttributes.Length > 0)
+{
+    HelpAttribute attr = (HelpAttribute)displayMethodAttributes[0];
+    Console.WriteLine($"Display method help URL : {attr.Url} - Related topic : {attr.Topic}");
+}
+
+Console.ReadLine();

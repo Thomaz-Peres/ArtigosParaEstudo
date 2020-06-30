@@ -1,0 +1,52 @@
+Um delegate é um tipo que representa referêcias aos métodos com uma lista de parâmetrose tipo de retorno específicios. Delegados possibilitam o tratamento de metodos como entidades que podem ser atribuídos a variaveis e passadas como parâmetros. Os delegados são semelhantes ao conceito de function pointers encontrados em algumas outras linguas. Ao contrario dos function pointers, os delegados sao orientados a objetos e sao type-safe.
+
+O exemplo a seguir declara e usa um tipo delegado chamado Function.
+
+using System;
+delegate double Function(double x);
+class Multiplier
+{
+    double factor;
+    public Multiplier(double factor)
+    {
+        this.factor = factor;
+    }
+    public double Multiply(double x)
+    {
+        return x * factor;
+    }
+}
+class DelegateExample
+{
+    static double Square(double x)
+    {
+        return x * x;
+    }
+    static double[] Apply(double[] a, Function f)
+    {
+        double[] result = new double[a.Length];
+        for (int i = 0; i < a.Length; i++) result[i] = f(a[i]);
+        return result;
+    }
+    static void Main()
+    {
+        double[] a = {0.0, 0.5, 1.0};
+        double[] squares = Apply(a, Square);
+        double[] sines = Apply(a, Math.Sin);
+        Multiplier m = new Multiplier(2.0);
+        double[] doubles =  Apply(a, m.Multiply);
+    }
+}
+
+
+A instancia FUNCTION do tipo delegate, pode fazer referencia a qualquer metodo que tem o argumento DOUBLE e retornar um valor DOUBLE.   O metodo APPLY aplica uma determinada função aos elementos de um DOUBLUE[], retornando um DOUBLE[] com os resultados.   No metodo MAIN, APPLY é usado para aplicar 3 funções diferentes de DOUBLE[]
+
+Um delegado pode referenciar um método estático (como Square ou Math.Sin no exemplo anterior) ou um método de instância (como m.Multiply no exemplo anterior). Um delegado que referencia um método de instância também referencia um objeto específico, e quando o método de instância é invocado por meio do delegado, esse objeto se torna this na invocação
+
+
+Os delegados também podem ser criados usando funções anônimas, que são "métodos inline" que são criados quando declarados. As funções anônimas podem ver as variáveis locais dos métodos ao redor. O exemplo a seguir não cria uma classe:
+
+double[] doubles =  Apply(a, (double x) => x * 2.0);
+
+Um delegado não sabe ou se preocupa com a classe do método que ele se refere; tudo o que importa é que o método referenciado tem os mesmos parâmetros e tipo de retorno que o delegado.
+ 
