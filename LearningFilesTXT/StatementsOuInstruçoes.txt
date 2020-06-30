@@ -1,0 +1,266 @@
+As açoes do programa sao expressadas usando statements. o C# oferece suporte a vários tipos diferentes de statements, algumas delas definidas em termos de statements inseridas.
+
+Um block permite multiplos statements, em contexto que um unico statements é permitido. Um block é composto por uma lista de statements escrita entre os delimitadores "{" e "}"
+
+
+Declaration statements == sao usadas para declarar local variables and constants.
+
+Expression statements  == Sao usadas para avaliar expressões. As expressoes que podem ser usadas como intruções incluem chamadas de methods, alocação de objeto usando o operador new, 
+atribuições usando "=", e operadores de atribuição compostos, operações de incremento e decremento usando os operadores ++ e -- e as expressões await.
+
+Selection statements == são usados para selecionar um numero de varias possibilidades de statements para execução com base no valor de alguma expressão. Esse grupo contêm o IF e SWITCH statements.
+
+Iteration statements == são usados para executar repetidamente um statements incorporada. Esse grupo contêm while, do, for, and foreach statements.
+
+Jump statements == são usados para transferir o controle. Este grupo contêm break, continue, goto, throw, return, and yield statements.
+
+Os statements try...catch == São usados para pegar exceções que ocorrem durante a execução de um block, and the try...finally statements é usado para especificar quando o codigo executado é finalizado, se ocorreu uma exceção ou não.
+
+Checked and unchecked statements == são usados para controlar o contexto de verificação de estouro, para operações do aritmeticas integral e conversações.
+
+Lock statements == é usado para obter o bloqueio de exclusão mútua para um determinado objeto, executar uma instrução e, em seguida, liberar o bloqueio.
+
+
+Using statements == é usado para obter um recurso, executar um statements, e depois descartar este recurso
+
+A lista a seguir contém os tipos de instruções que podem ser usados, e fonrce um exemplo para cada um.
+
+
+
+
+1- LOCAL VARIABLE Declaration 
+static void Declarations(string[] args)
+{
+    int a;
+    int b = 2, c = 3;
+    a = 1;
+    Console.WriteLine(a + b + c);
+}
+
+1.1- LOCAL CONSTANT Declaration 
+static void ConstantDeclarations(string[] args)
+{
+    const float pi = 3.1415927f;
+    const int r = 25;
+    Console.WriteLine(pi * r * r);
+}
+
+
+2.- EXPRESSION statement
+static void Expressions(string[] args)
+{
+    int i;
+    i = 123;                // Expression statement
+    Console.WriteLine(i);   // Expression statement
+    i++;                    // Expression statement
+    Console.WriteLine(i);   // Expression statement
+}
+
+
+3.- IF statement
+static void IfStatement(string[] args)
+{
+    if (args.Length == 0)
+    {
+        Console.WriteLine("No arguments");
+    }
+    else
+    {
+        Console.WriteLine("One or more arguments");
+    }
+}
+
+
+4.- SWITCH statement
+static void SwitchStatement(string[] args)
+{
+    int n = args.Length;
+    switch (n)
+    {
+        case 0:
+            Console.WriteLine("No arguments");
+            break;
+        case 1:
+            Console.WriteLine("One argument");
+            break;
+        default:
+            Console.WriteLine($"{n} arguments");
+            break;
+    }
+}
+
+5.- WHILE statement
+static void WhileStatement(string[] args)
+{
+    int i = 0;
+    while (i < args.Length)
+    {
+        Console.WriteLine(args[i]);
+        i++;
+    }
+}
+
+6.- DO statement
+static void DoStatement(string[] args)
+{
+    string s;
+    do
+    {
+        s = Console.ReadLine();
+        Console.WriteLine(s);
+    } while (!string.IsNullOrEmpty(s));
+}
+
+7.- FOR statement
+static void ForStatement(string[] args)
+{
+    for (int i = 0; i < args.Length; i++)
+    {
+        Console.WriteLine(args[i]);
+    }
+}
+
+8.- FOREACH statement
+static void ForEachStatement(string[] args)
+{
+    foreach (string s in args)
+    {
+        Console.WriteLine(s);
+    }
+}
+
+9.- BREAK statement
+static void BreakStatement(string[] args)
+{
+    while (true)
+    {
+        string s = Console.ReadLine();
+        if (string.IsNullOrEmpty(s))
+            break;
+        Console.WriteLine(s);
+    }
+}
+
+10.- CONTINUE statements
+static void ContinueStatement(string[] args)
+{
+    for (int i = 0; i < args.Length; i++)
+    {
+        if (args[i].StartsWith("/"))
+            continue;
+        Console.WriteLine(args[i]);
+    }
+}
+
+11.- GOTO statement
+static void GoToStatement(string[] args)
+{
+    int i = 0;
+    goto check;
+    loop:
+    Console.WriteLine(args[i++]);
+    check:
+    if (i < args.Length)
+        goto loop;
+}
+
+12.- RETURN statement
+static int Add(int a, int b)
+{
+    return a + b;
+}
+static void ReturnStatement(string[] args)
+{
+   Console.WriteLine(Add(1, 2));
+   return;
+}
+
+13.- YIELD statement
+static System.Collections.Generic.IEnumerable<int> Range(int start, int end)
+{
+    for (int i = start; i < end; i++)
+    {
+        yield return i;
+    }
+    yield break;
+}
+static void YieldStatement(string[] args)
+{
+    foreach (int i in Range(-10,10))
+    {
+        Console.WriteLine(i);
+    }
+}
+
+14.- THROW AND TRY statement
+static double Divide(double x, double y)
+{
+    if (y == 0)
+        throw new DivideByZeroException();
+    return x / y;
+}
+static void TryCatch(string[] args)
+{
+    try
+    {
+        if (args.Length != 2)
+        {
+            throw new InvalidOperationException("Two numbers required");
+        }
+        double x = double.Parse(args[0]);
+        double y = double.Parse(args[1]);
+        Console.WriteLine(Divide(x, y));
+    }
+    catch (InvalidOperationException e)
+    {
+        Console.WriteLine(e.Message);
+    }
+    finally
+    {
+        Console.WriteLine("Good bye!");
+    }
+}
+
+15.- CHECKED AND UNCHECKED statements
+static void CheckedUnchecked(string[] args)
+{
+    int x = int.MaxValue;
+    unchecked
+    {
+        Console.WriteLine(x + 1);  // Overflow
+    }
+    checked
+    {
+        Console.WriteLine(x + 1);  // Exception
+    }
+}
+
+16.- LOCK statements
+class Account
+{
+    decimal balance;
+    private readonly object sync = new object();
+    public void Withdraw(decimal amount)
+    {
+        lock (sync)
+        {
+            if (amount > balance)
+            {
+                throw new Exception(
+                    "Insufficient funds");
+            }
+            balance -= amount;
+        }
+    }
+}
+
+17.- USING statements
+static void UsingStatement(string[] args)
+{
+    using (TextWriter w = File.CreateText("test.txt"))
+    {
+        w.WriteLine("Line one");
+        w.WriteLine("Line two");
+        w.WriteLine("Line three");
+    }
+}
